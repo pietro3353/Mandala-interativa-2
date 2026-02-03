@@ -9,7 +9,7 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         /* Fundo transparente para o corpo */
@@ -43,14 +43,21 @@
                 </defs>
                 <!-- Slices serão gerados via JS aqui -->
                 
-                <!-- Centro Estático -->
-                <circle cx="300" cy="300" r="75" fill="#003399" class="shadow-inner" />
-                <text x="300" y="295" text-anchor="middle" fill="white" font-weight="bold" font-size="24" style="font-style: italic; letter-spacing: -1px;">Ypê</text>
-                <text x="300" y="320" text-anchor="middle" fill="#FFD700" font-size="10" font-weight="bold" style="letter-spacing: 2px; text-transform: uppercase;">Cultura</text>
+                <!-- Centro Estático (Alterado para fundo Branco com Borda Azul para combinar com a imagem) -->
+                <circle cx="300" cy="300" r="85" fill="#FFFFFF" stroke="#002855" stroke-width="2" class="shadow-inner" />
+                
+                <!-- Texto Superior: O JEITO -->
+                <text x="300" y="270" text-anchor="middle" fill="#002855" font-size="14" font-weight="900" style="letter-spacing: 1px; text-transform: uppercase;">O JEITO</text>
+                
+                <!-- Logo Central: Ypê (Cor Azul Original) -->
+                <text x="300" y="315" text-anchor="middle" fill="#003399" font-weight="bold" font-size="42" style="font-style: italic; letter-spacing: -3px; font-family: 'Inter', sans-serif;">Ypê</text>
+                
+                <!-- Texto Inferior: DE... -->
+                <text x="300" y="350" text-anchor="middle" fill="#002855" font-size="14" font-weight="900" style="letter-spacing: 1px; text-transform: uppercase;">DE</text>
             </svg>
 
             <!-- Tooltip Instrução -->
-            <div id="instruction-tooltip" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-24 bg-white/90 px-4 py-2 rounded-full text-xs text-gray-500 shadow-md pointer-events-none transition-opacity duration-300">
+            <div id="instruction-tooltip" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-32 bg-white/90 px-4 py-2 rounded-full text-xs text-gray-500 shadow-md pointer-events-none transition-opacity duration-300 border border-gray-200">
                 Passe o mouse nas fatias
             </div>
         </div>
@@ -59,7 +66,7 @@
         <div id="detail-panel" class="flex-1 w-full max-w-md bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden min-h-[500px] flex flex-col transition-all duration-300">
             <!-- Conteúdo será injetado via JS -->
             <div class="h-full flex flex-col items-center justify-center p-10 text-center text-gray-400">
-                <i data-lucide="lightbulb" class="w-12 h-12 mb-4 text-yellow-400 opacity-50"></i>
+                <i data-lucide="lightbulb" class="w-12 h-12 mb-4 text-green-600 opacity-50"></i>
                 <h3 class="text-lg font-bold text-gray-600 mb-2">Explore a Cultura Ypê</h3>
                 <p class="text-sm">Selecione uma dimensão na mandala para visualizar os valores, métodos e indicadores de sucesso.</p>
             </div>
@@ -67,13 +74,14 @@
     </div>
 
     <script>
-        // --- DADOS ---
+        // --- DADOS COM A NOVA PALETA DE CORES (GRADIENTE VERDE) ---
+        // As cores foram extraídas visualmente da imagem de referência (ciclo do Verde Escuro ao Verde Claro/Menta)
         const data = [
             {
                 id: "manufaturar",
                 label: "Manufaturar",
-                color: "#F6D3C1",
-                textColor: "#A84A00",
+                color: "#1B4D3E", // Verde Escuro Profundo (Topo)
+                textColor: "#FFFFFF", // Texto Branco para contraste
                 iconName: "factory",
                 values: ["Qualidade de Ponta a Ponta", "Trabalho com Disciplina", "Honestidade"],
                 methods: ["SEY (Sistema de Qualidade)", "Logística 4.0 (CD Automatizado/AGVs)", "S&OP Integrado", "Homologação Técnica"],
@@ -82,8 +90,8 @@
             {
                 id: "cuidar",
                 label: "Cuidar",
-                color: "#EBC6E8",
-                textColor: "#7D1F76",
+                color: "#2E6B56", // Verde Floresta (Topo Direita)
+                textColor: "#FFFFFF",
                 iconName: "heart",
                 values: ["Cuidado", "Humildade", "Senso de Dono"],
                 methods: ["Ciclo de Gente & PDI", "SAC Humanizado", "Projeto Florestas Ypê", "Gestão de Recursos Hídricos"],
@@ -92,8 +100,8 @@
             {
                 id: "projetizar",
                 label: "Projetizar",
-                color: "#C2E6F2",
-                textColor: "#005A75",
+                color: "#418F71", // Verde Petróleo/Teal (Baixo Direita)
+                textColor: "#FFFFFF",
                 iconName: "zap",
                 values: ["Trabalho com Disciplina", "Simplicidade", "Senso de Dono"],
                 methods: ["Segurança da Informação", "Metodologia Lean / Kaizen", "Stage-Gate (Inovação)", "Automação de Fluxos"],
@@ -102,8 +110,8 @@
             {
                 id: "crescer",
                 label: "Crescer",
-                color: "#D8F0D3",
-                textColor: "#1E590F",
+                color: "#5EC2A0", // Verde Água Médio (Baixo)
+                textColor: "#002855", // Texto Azul Marinho para contraste no fundo claro
                 iconName: "trending-up",
                 values: ["Senso de Dono", "Qualidade de Ponta a Ponta", "Trabalho com Disciplina"],
                 methods: ["Expansão Fabril (Nordeste)", "Gestão de Categoria e Mix", "Relançamento de Marcas", "Gestão Orçamentária (OBZ)"],
@@ -112,8 +120,8 @@
             {
                 id: "liderar",
                 label: "Liderar",
-                color: "#D6EAF8",
-                textColor: "#154360",
+                color: "#87DFC1", // Verde Menta (Baixo Esquerda)
+                textColor: "#002855",
                 iconName: "users",
                 values: ["Humildade", "Senso de Dono", "Honestidade"],
                 methods: ["Academia de Liderança Ypê", "Inteligência de Mercado", "Liderança pelo Exemplo", "Programa de Embaixadores"],
@@ -122,8 +130,8 @@
             {
                 id: "servir",
                 label: "Servir",
-                color: "#D7DBDD",
-                textColor: "#424949",
+                color: "#B5F5D9", // Verde Pálido/Gelo (Topo Esquerda)
+                textColor: "#002855",
                 iconName: "hand-heart",
                 values: ["Simplicidade", "Cuidado", "Honestidade"],
                 methods: ["JBP com Varejo", "Portal B2B Digital", "Voluntariado Corporativo", "Canal de Compliance"],
@@ -137,7 +145,7 @@
         // --- FUNÇÕES AUXILIARES DE GEOMETRIA ---
         const totalSlices = data.length;
         const radius = 180;
-        const innerRadius = 80;
+        const innerRadius = 90; // Aumentado ligeiramente para acomodar melhor o centro branco
         const center = { x: 300, y: 300 };
 
         function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
@@ -184,7 +192,7 @@
                 path.setAttribute("d", describeDonutSlice(center.x, center.y, radius, innerRadius, startAngle, endAngle));
                 path.setAttribute("fill", item.color);
                 path.setAttribute("stroke", "white");
-                path.setAttribute("stroke-width", "2");
+                path.setAttribute("stroke-width", "3"); // Borda branca mais grossa para separar as fatias
                 path.setAttribute("class", "slice-path");
 
                 // Texto e Ícone
@@ -196,7 +204,7 @@
                 foreignObject.setAttribute("y", textPos.y - 30);
                 foreignObject.setAttribute("width", "80");
                 foreignObject.setAttribute("height", "60");
-                foreignObject.setAttribute("style", "pointer-events: none;"); // Permite clique através do texto
+                foreignObject.setAttribute("style", "pointer-events: none;"); 
 
                 const div = document.createElement("div");
                 div.className = "flex flex-col items-center justify-center h-full text-center";
@@ -204,7 +212,7 @@
                     <div style="color: ${item.textColor};" class="mb-1 transform scale-75 lg:scale-100">
                         <i data-lucide="${item.iconName}" width="24" height="24"></i>
                     </div>
-                    <span class="font-bold text-[10px] uppercase tracking-wider" style="color: ${item.textColor};">
+                    <span class="font-bold text-[10px] uppercase tracking-wider" style="color: ${item.textColor}; text-shadow: 0px 0px 2px rgba(0,0,0,0.1);">
                         ${item.label}
                     </span>
                 `;
@@ -224,7 +232,7 @@
                 svg.insertBefore(group, svg.lastElementChild.previousElementSibling); // Insere antes do centro
             });
 
-            lucide.createIcons(); // Inicializa ícones dentro do SVG
+            lucide.createIcons(); 
         }
 
         // --- ATUALIZAÇÃO DO PAINEL ---
@@ -236,10 +244,12 @@
             const slices = document.querySelectorAll('.slice-group');
             slices.forEach((slice, idx) => {
                 if (idx === index) {
-                    slice.setAttribute("transform", "scale(1.02)");
+                    slice.setAttribute("transform", "scale(1.05)");
                     slice.style.transformOrigin = "center";
+                    slice.style.filter = "drop-shadow(0px 4px 6px rgba(0,0,0,0.2))";
                 } else {
                     slice.setAttribute("transform", "scale(1)");
+                    slice.style.filter = "none";
                 }
             });
 
@@ -258,14 +268,14 @@
                 <div class="h-full flex flex-col fade-in">
                     <div class="p-6 border-b" style="background-color: ${item.color};">
                         <div class="flex items-center gap-3 mb-2">
-                            <div class="p-2 bg-white/50 rounded-lg text-blue-900">
-                                <i data-lucide="${item.iconName}" width="24" height="24" style="color: ${item.textColor}"></i>
+                            <div class="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
+                                <i data-lucide="${item.iconName}" width="28" height="28" style="color: ${item.textColor}"></i>
                             </div>
                             <h2 class="text-2xl font-bold" style="color: ${item.textColor}">
                                 ${item.label}
                             </h2>
                         </div>
-                        <p class="text-sm font-medium opacity-80" style="color: ${item.textColor}">
+                        <p class="text-sm font-medium opacity-90" style="color: ${item.textColor}">
                             Dimensão Estratégica
                         </p>
                     </div>
@@ -279,7 +289,7 @@
                             </h3>
                             <div class="flex flex-wrap gap-2">
                                 ${item.values.map(val => `
-                                    <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-semibold border border-slate-200">
+                                    <span class="px-3 py-1 bg-slate-50 text-slate-700 rounded-full text-xs font-semibold border border-slate-200">
                                         ${val}
                                     </span>
                                 `).join('')}
@@ -295,7 +305,7 @@
                             <ul class="space-y-2">
                                 ${item.methods.map(method => `
                                     <li class="flex items-start gap-2 text-sm text-gray-600">
-                                        <div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-900 flex-shrink-0"></div>
+                                        <div class="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style="background-color: ${item.color}"></div>
                                         ${method}
                                     </li>
                                 `).join('')}
@@ -303,16 +313,16 @@
                         </div>
 
                         <!-- KPIs -->
-                        <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
-                            <h3 class="flex items-center gap-2 text-sm font-bold text-blue-800 uppercase tracking-wider mb-3">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h3 class="flex items-center gap-2 text-sm font-bold uppercase tracking-wider mb-3" style="color: ${item.color}">
                                 <i data-lucide="bar-chart-2" width="16" height="16"></i>
                                 Indicadores de Sucesso (KPIs)
                             </h3>
                             <div class="grid grid-cols-1 gap-2">
                                 ${item.kpis.map(kpi => `
                                     <div class="flex justify-between items-center text-sm">
-                                        <span class="text-blue-700 font-medium">${kpi}</span>
-                                        <span class="text-xs bg-white px-2 py-0.5 rounded text-blue-400 border border-blue-100">Alvo</span>
+                                        <span class="text-slate-700 font-medium">${kpi}</span>
+                                        <span class="text-[10px] bg-white px-2 py-0.5 rounded border border-slate-200 text-gray-400">Alvo</span>
                                     </div>
                                 `).join('')}
                             </div>
@@ -322,7 +332,7 @@
             `;
 
             panel.innerHTML = content;
-            lucide.createIcons(); // Renderiza ícones injetados no novo HTML
+            lucide.createIcons(); 
         }
 
         // Inicialização
@@ -334,5 +344,6 @@
     </script>
 </body>
 </html>
+
 
 
