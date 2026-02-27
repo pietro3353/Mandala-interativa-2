@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mandala Ypê Circular 7 Dimensões</title>
+    <title>Mandala Ypê Circular 7 Dimensões - Atualizada</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -71,21 +71,20 @@
             </div>
         </div>
 
-        <!-- Painel de Detalhes com as Novas Informações do Miro -->
-        <div id="detail-panel" class="flex-1 w-full max-w-lg bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl border-t-8 border-[#3A9480] overflow-hidden min-h-[600px] flex flex-col transition-all duration-300 relative">
+        <!-- Painel de Detalhes -->
+        <div id="detail-panel" class="flex-1 w-full max-w-2xl bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl border-t-8 border-[#3A9480] overflow-hidden h-[650px] flex flex-col transition-all duration-300 relative">
             <div class="h-full flex flex-col items-center justify-center p-10 text-center text-gray-400">
                 <div class="bg-blue-50 p-6 rounded-full mb-6 shadow-inner">
                     <i data-lucide="layout-dashboard" class="w-16 h-16 text-[#3A9480]"></i>
                 </div>
                 <h3 class="text-2xl font-bold text-[#003399] mb-3">O Ecossistema Ypê</h3>
-                <p class="text-sm text-gray-500 max-w-xs leading-relaxed">Clique em uma das dimensões da mandala para explorar a narrativa estratégica, frentes de atuação e projetos.</p>
+                <p class="text-sm text-gray-500 max-w-sm leading-relaxed">Clique em uma das dimensões da mandala para explorar a narrativa estratégica, atributos, direcionadores e processos, conforme definido no planejamento.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // --- DADOS REESTRUTURADOS COM BASE NO MIRO (7 DIMENSÕES) ---
-        // Paleta verde mantida conforme solicitação
+        // --- DADOS REESTRUTURADOS E SIMPLIFICADOS (7 DIMENSÕES) ---
         const data = [
             { 
                 id: "inovar", 
@@ -93,9 +92,14 @@
                 color: "#18544B", 
                 textColor: "#FFFFFF", 
                 iconName: "lightbulb", 
-                narrative: "Inovação incremental com foco em gerar valor para a Ypê. Utiliza a inovação para sustentar seu crescimento, eficiência e relevância na prateleira. Nem sempre é inovação disruptiva. É estimular pessoas para trazer ideias e não só experimentar.",
-                frentes: ["Oficinas de Produto", "Novos Modelos", "Novos Mercados", "Negócio"], 
-                methods: ["Comitê de IA e Yara", "Oficinas de Tecnologia", "Novos Canais (Food Service, Digitais)", "Parcerias (ex. Loccitane)"] 
+                narrative: "INOVAÇÃO INCREMENTAL COM FOCO EM GERAR VALOR PARA A YPÊ. Utiliza a inovação para sustentar seu crescimento, eficiência e relevância na prateleira para o consumidor. Nem sempre é inovação disruptiva. Estimular pessoas para trazer idéias não só experimentar.",
+                details: [
+                    { atributo: "PRODUTO", direcionador: "ESTUDO DE TENDÊNCIAS DE MERCADO", processos: "Pesquisas com consumidor (Nielsen)" },
+                    { atributo: "PRODUTO", direcionador: "OFICINAS DE PRODUTO", processos: "Governança de novas ideias de produto" },
+                    { atributo: "NEGÓCIO", direcionador: "NOVOS MODELOS", processos: "Novas parcerias (ex: Loccitane); Omnicanalidade" },
+                    { atributo: "NEGÓCIO", direcionador: "NOVAS TECNOLOGIAS E PRESENÇA DIGITAL", processos: "Comitê de Inteligência Artificial; Yara" },
+                    { atributo: "NEGÓCIO", direcionador: "NOVOS MERCADOS", processos: "Novos canais; Nova categoria (tixlog)" }
+                ]
             },
             { 
                 id: "liderar", 
@@ -103,9 +107,21 @@
                 color: "#22695C", 
                 textColor: "#FFFFFF", 
                 iconName: "flag", 
-                narrative: "Um sistema onde o líder define o caminho (Estratégia), prepara as Pessoas, garante os Processos, estabelece as regras (Governança) e protege a Reputação da marca. Uma liderança consistente que gera decisões eficazes.",
-                frentes: ["Estratégia e Mercado", "Pessoas e Engajamento", "Governança e Processos", "Reputação e Crise"], 
-                methods: ["Direcionamento 70 em 7 e PPR", "Ciclo de Gente (Calibração e Feedback)", "Ritos Trimestrais e Fóruns", "SEY, The Voice Ypê e Embaixadores"] 
+                narrative: "Jeito Ypê de Liderar é um sistema onde o líder define o caminho (Estratégia), prepara as Pessoas, garante os Processos, estabelece as regras (Governança) e protege a Reputação. O resultado esperado dessa conexão direta é uma liderança consistente que gera decisões eficazes e rentabilidade sustentável.",
+                details: [
+                    { atributo: "ESTRATÉGIA", direcionador: "MERCADO", processos: "Regionalização; Aumentar Participação de Mercado; Novos CDs" },
+                    { atributo: "ESTRATÉGIA", direcionador: "DIRECIONAMENTO ESTRATÉGICO", processos: "70 em 7; Reunião trimestral de resultados" },
+                    { atributo: "ESTRATÉGIA", direcionador: "METAS E OBJETIVOS CLAROS", processos: "PPR; Analytics e inteligência de vendas regionalizada" },
+                    { atributo: "PESSOAS", direcionador: "ATRAÇÃO", processos: "Employer Branding; Programa de Estágio" },
+                    { atributo: "PESSOAS", direcionador: "ENGAJAMENTO", processos: "Segurança Psicológica dentro das áreas; Convenção de Líderes" },
+                    { atributo: "PESSOAS", direcionador: "DESENVOLVIMENTO", processos: "Feedbacks contínuos; Ciclo de Gente" },
+                    { atributo: "GOVERNANÇA", direcionador: "MODELO DE GESTÃO", processos: "Fóruns de decisão; Ritos (Reunião Trimestral de Resultados, etc)" },
+                    { atributo: "PROCESSOS", direcionador: "AUTOMAÇÃO", processos: "Dia Y (Hackathon)" },
+                    { atributo: "PROCESSOS", direcionador: "INTELIGÊNCIA ARTIFICIAL", processos: "Comitê de avaliação de LLMs" },
+                    { atributo: "PROCESSOS", direcionador: "MELHORIA CONTÍNUA", processos: "SEY; Green Belt; Ydealize; Cultivar Ideias" },
+                    { atributo: "REPUTAÇÃO", direcionador: "GESTÃO DE CRISE", processos: "Comitê de crise" },
+                    { atributo: "REPUTAÇÃO", direcionador: "IMAGEM INSTITUCIONAL", processos: "Narrativa Corporativa; Programa de Embaixadores" }
+                ]
             },
             { 
                 id: "gerar-resultados", 
@@ -113,9 +129,13 @@
                 color: "#2D7E6E", 
                 textColor: "#FFFFFF", 
                 iconName: "trending-up", 
-                narrative: "Foco na entrega de valor real ao negócio, assegurando que os resultados financeiros não sejam obtidos a qualquer custo, mas sim através de processos eficientes, éticos e com alta qualidade.",
-                frentes: ["Eficiência e Performance", "Ética e Integridade", "Projetos Estruturados", "Disciplina Financeira"], 
-                methods: ["GPD (Modelo Falconi)", "Selo Pró-Ética e Canal de Conduta", "Governança VMO e IBP", "Gestão de Indicadores"] 
+                narrative: "O foco central desta dimensão é a entrega de valor real ao negócio, assegurando que os resultados financeiros não sejam obtidos a qualquer custo, mas sim através de processos eficientes, éticos e com alta qualidade.",
+                details: [
+                    { atributo: "RENTABILIDADE", direcionador: "DISCIPLINA FINANCEIRA", processos: "Gestão Financeira Corporativa" },
+                    { atributo: "EFICIÊNCIA E PERFORMANCE", direcionador: "GESTÃO DE INDICADORES", processos: "GPD (Modelo Falconi)" },
+                    { atributo: "EFICIÊNCIA E PERFORMANCE", direcionador: "PRODUTIVIDADE", processos: "SEY e TPM" },
+                    { atributo: "ÉTICA", direcionador: "CULTURA DE INTEGRIDADE", processos: "Selo Pró-Ética; Código de Conduta; Be Compliance" }
+                ]
             },
             { 
                 id: "executar", 
@@ -123,9 +143,13 @@
                 color: "#3A9480", 
                 textColor: "#FFFFFF", 
                 iconName: "check-square", 
-                narrative: "Foca em transformar o que foi planejado em realidade com excelência, disciplina e autorresponsabilização. Cumprir, realizar e colocar em prática as tarefas e rotinas do dia a dia com rigor técnico.",
-                frentes: ["Qualidade e Rotinas", "Sincronismo da Cadeia", "Eficiência Comercial", "Cliente e Logística"], 
-                methods: ["Diagnóstico de Qualidade (Nexus/Ekantika)", "S&OP e Gestão de Fornecimento", "JBP, CRM e Regionalização", "Acompanhamento de Ruptura e Prazos"] 
+                narrative: "Executar foca em transformar o que foi planejado em realidade com excelência, disciplina e autorresponsabilização. Executar é o termo mais adequado (em vez de 'Operar'), pois significa cumprir, realizar e colocar em prática uma tarefa ou ordem.",
+                details: [
+                    { atributo: "Projetos", direcionador: "Gestão Estruturada", processos: "VMO; Governança de Projetos; IBP" },
+                    { atributo: "Qualidade", direcionador: "-", processos: "Diagnóstico de Qualidade (Nexus); Mandala de Qualidade" },
+                    { atributo: "Rotinas", direcionador: "Disciplina na Execução", processos: "Comitê de Indicadores; TPM; SEY" },
+                    { atributo: "Sincronismo da Cadeia", direcionador: "Fornecimento e Operações", processos: "S&OP; Gestão Cadeia de Fornecimento; Plataforma Coupa" }
+                ]
             },
             { 
                 id: "servir", 
@@ -133,9 +157,14 @@
                 color: "#49AA93", 
                 textColor: "#FFFFFF", 
                 iconName: "users", 
-                narrative: "Olhar aprofundado para os clusters de relacionamento para sustentar o fator fundamental do negócio. Uma proposta de valor clara focada na democratização do acesso e na experiência ponta a ponta.",
-                frentes: ["Portfólio de Produtos", "Consumidor", "Experiência Omnicanal", "Democratização de Acesso"], 
-                methods: ["Projeto IA SAC", "Pesquisas de Experiência do Consumidor", "Marketing (Campanhas, Redes, Mídia)", "Ominicanalidade da Jornada"] 
+                narrative: "A história central da dimensão Servir é baseada na importância de olhar para esses dois clusters de relacionamento para sustentar o fator fundamental do negócio.",
+                details: [
+                    { atributo: "CLIENTE", direcionador: "EFICIÊNCIA COMERCIAL", processos: "JBP (Joint Business Plan); CRM; Contato com Cliente via Força de Vendas" },
+                    { atributo: "CLIENTE", direcionador: "EFICIÊNCIA LOGÍSTICA", processos: "Acompanhamento de Prazos de Entrega; Acompanhamento de Ruptura de Gôndola" },
+                    { atributo: "CONSUMIDOR", direcionador: "PROPOSTA DE VALOR CLARA", processos: "Marketing (Campanhas, Redes Sociais, Mídia)" },
+                    { atributo: "CONSUMIDOR", direcionador: "DEMOCRATIZAÇÃO DE ACESSO", processos: "Projeto IA SAC; SAC" },
+                    { atributo: "CONSUMIDOR", direcionador: "EXPERIÊNCIA DO CONSUMIDOR", processos: "Pesquisas de Monitoramento da Experiência; Ominicanalidade da Jornada" }
+                ]
             },
             { 
                 id: "aprender", 
@@ -143,9 +172,12 @@
                 color: "#5BC1A6", 
                 textColor: "#002855", 
                 iconName: "book-open", 
-                narrative: "Deixar de ser vista como catálogo de cursos. O novo foco é transformar o aprendizado em cultura viva e diária, gerada na prática, compartilhada e institucionalizada para garantir a perenidade do negócio.",
-                frentes: ["Função Atual (Básico)", "Proficiência e Novas Habilidades", "Gestão do Conhecimento", "Comunidade"], 
-                methods: ["UnYpê e Plataforma Único Skill", "Academias (Sopro, Vendas, Manutenção)", "LUP, IOPs e Matrizes de Habilidade", "Ypê Talks e Multiplicadores"] 
+                narrative: "A Narrativa percorre a intenção de deixar de ser vista como um simples \"catálogo de cursos\" ou uma universidade corporativa tradicional. O novo foco é transformar o aprendizado em uma cultura viva e diária, onde o conhecimento é gerado na prática, compartilhado entre as pessoas e institucionalizado pela companhia, além de garantir a perenidade e a excelência operacional do negócio. É responsabilidade de cada um transformar conhecimento em valor para si e para a organização.",
+                details: [
+                    { atributo: "Função Atual (Básico)", direcionador: "-", processos: "Programa de Estágio; Academias (Sopro, Vendas, Manutenção); Onboarding Industrial" },
+                    { atributo: "Novas Habilidades (Carreira)", direcionador: "-", processos: "UnYpê (Learning Sprints); Plataforma Único Skill; Ypê Talks; EducaYpê" },
+                    { atributo: "Repassar Conhecimento", direcionador: "-", processos: "Hubs de Aprendizagem; Matrizes de Habilidades; LUP (Lição de Um Ponto)" }
+                ]
             },
             { 
                 id: "cuidar", 
@@ -153,9 +185,15 @@
                 color: "#70D7BA", 
                 textColor: "#002855", 
                 iconName: "heart", 
-                narrative: "Zelo pelo ecossistema do negócio, abrangendo desde o impacto social até a preservação dos ativos físicos. Uma atuação pautada por simplicidade e zelo prático, onde o cuidado não é via de mão única.",
-                frentes: ["Comunidade e Meio Ambiente", "Colaboradores e D&I", "Saúde e Segurança", "Patrimônio e Ativos"], 
-                methods: ["Programa Cuidar e Saúde Integral", "Sustentabilidade (Plano Diretor, GHG)", "Responsabilidade Social (Educa 2030, Voluntariado)", "Conservação Autônoma (TPM) e SSMA"] 
+                narrative: "A narrativa para a dimensão Cuidar na Ypê foi estruturada em torno do zelo pelo ecossistema do negócio, abrangendo desde o impacto social até a preservação dos ativos físicos. O conceito central é que a companhia cuida de diferentes frentes através de direcionadores específicos, pautados por simplicidade e pelo zelo prático. A narrativa também introduz a ideia de que o cuidado não é uma via de mão única.",
+                details: [
+                    { atributo: "COMUNIDADE", direcionador: "RESPONSABILIDADE SOCIAL", processos: "Programa de Voluntariado; Movimento Educa 2030; Visitas Você na Ypê" },
+                    { atributo: "MEIO AMBIENTE", direcionador: "SUSTENTABILIDADE", processos: "Plano Diretor de Sustentabilidade; Selo Ouro GHG Protocol; Movimento Pró-Água" },
+                    { atributo: "COLABORADORES", direcionador: "EXPERIÊNCIA DO COLABORADOR", processos: "Pesquisas de Engajamento (GPTW / Pulsa); Foco em Mulheres na Liderança; Revitaliza RH; Programa de D&I" },
+                    { atributo: "COLABORADORES", direcionador: "SAÚDE E SEGURANÇA", processos: "Programa de Saúde Integral; Programa Cuidar; Parceria Dupont" },
+                    { atributo: "PATRIMÔNIO", direcionador: "AMBIENTE SEGURO", processos: "Programa de Conservação Autônoma (TPM); SSMA" },
+                    { atributo: "PATRIMÔNIO", direcionador: "RECURSOS", processos: "Gestão de Sistemas; Gestão de Capacidade e Infraestrutura" }
+                ]
             }
         ];
 
@@ -203,15 +241,13 @@
                 group.setAttribute("data-index", index);
                 group.style.transformOrigin = `${center.x}px ${center.y}px`;
                 
-                // O Arco (Fatia)
                 const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
                 path.setAttribute("d", describeDonutSlice(center.x, center.y, radius, innerRadius, startAngle, endAngle));
                 path.setAttribute("fill", item.color);
-                path.setAttribute("stroke", "#141950"); // Borda da cor do fundo do slide para separar perfeitamente
+                path.setAttribute("stroke", "#141950"); 
                 path.setAttribute("stroke-width", "4"); 
                 path.setAttribute("class", "slice-path");
 
-                // Posição centralizada para ícone e texto
                 const textRadius = innerRadius + (radius - innerRadius) / 2;
                 const midAngle = startAngle + (anglePerSlice / 2);
                 const textPos = polarToCartesian(center.x, center.y, textRadius, midAngle);
@@ -246,7 +282,7 @@
             lucide.createIcons(); 
         }
 
-        // --- LÓGICA DE INTERAÇÃO (CLIQUE) ---
+        // --- LÓGICA DE INTERAÇÃO E PAINEL ---
         let activeSliceIndex = null;
 
         function setActiveSlice(index) {
@@ -260,16 +296,12 @@
                 const path = group.querySelector('.slice-path');
 
                 if (originalIndex === index) {
-                    // Fatia Ativa: Traz para frente, aumenta levemente
                     group.parentNode.appendChild(group); 
                     group.style.transform = `scale(1.05)`;
-                    
-                    // Adiciona borda dourada
                     path.setAttribute("stroke", "#FFD700");
                     path.setAttribute("stroke-width", "4");
                     path.style.filter = "drop-shadow(0px 10px 15px rgba(0,0,0,0.4))";
                 } else {
-                    // Fatias Inativas: Voltam ao lugar original
                     group.style.transform = `scale(1)`;
                     path.setAttribute("stroke", "#141950");
                     path.setAttribute("stroke-width", "4");
@@ -277,7 +309,6 @@
                 }
             });
 
-            // Esconde tooltip
             const tooltip = document.getElementById('instruction-tooltip');
             if(tooltip) tooltip.style.opacity = '0';
             
@@ -288,11 +319,62 @@
             const item = data[index];
             const panel = document.getElementById('detail-panel');
             
+            // Agrupar os detalhes por "Atributo"
+            const groupedDetails = item.details.reduce((acc, curr) => {
+                if (!acc[curr.atributo]) acc[curr.atributo] = [];
+                acc[curr.atributo].push(curr);
+                return acc;
+            }, {});
+
+            let detailsHTML = '';
+            
+            for (const [atributo, rows] of Object.entries(groupedDetails)) {
+                detailsHTML += `
+                    <div class="mb-6 bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+                        <div class="bg-gray-50 px-5 py-3 border-b border-gray-200 flex items-center gap-2">
+                            <i data-lucide="layers" width="16" height="16" style="color: ${item.color}"></i>
+                            <h4 class="font-bold text-gray-800 uppercase tracking-wider text-sm">Atributo: ${atributo}</h4>
+                        </div>
+                        <div class="p-0 divide-y divide-gray-100">
+                `;
+                
+                rows.forEach(row => {
+                    const hasDirecionador = row.direcionador && row.direcionador !== "-";
+                    const hasProcessos = row.processos && row.processos !== "-";
+
+                    detailsHTML += `
+                            <div class="p-5 hover:bg-gray-50/50 transition-colors">
+                                ${hasDirecionador ? `
+                                <div class="mb-2">
+                                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">Direcionador</span>
+                                    <span class="text-sm font-bold text-[#003399]">${row.direcionador}</span>
+                                </div>
+                                ` : ''}
+                                
+                                ${hasProcessos ? `
+                                <div>
+                                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">Processos / Programas</span>
+                                    <div class="flex items-start gap-2 text-sm text-gray-600 leading-relaxed">
+                                        <div class="mt-1.5 min-w-[6px] w-1.5 h-1.5 rounded-full flex-shrink-0" style="background-color: ${item.color}"></div>
+                                        <span>${row.processos}</span>
+                                    </div>
+                                </div>
+                                ` : ''}
+                            </div>
+                    `;
+                });
+
+                detailsHTML += `
+                        </div>
+                    </div>
+                `;
+            }
+
             const content = `
                 <div class="h-full flex flex-col fade-in relative">
                     <div class="absolute top-0 left-0 w-full h-2" style="background-color: ${item.color}"></div>
 
-                    <div class="p-8 border-b border-gray-100 bg-gradient-to-b from-white to-gray-50">
+                    <div class="p-8 border-b border-gray-100 bg-gradient-to-b from-white to-gray-50 flex-shrink-0">
                         <div class="flex items-center gap-4 mb-4">
                             <div class="p-4 rounded-2xl shadow-lg transform -rotate-3" style="background-color: ${item.color}">
                                 <i data-lucide="${item.iconName}" width="32" height="32" class="text-white"></i>
@@ -307,45 +389,13 @@
                             </div>
                         </div>
                         
-                        <!-- Nova Seção de Narrativa -->
                         <div class="bg-white p-4 rounded-xl border-l-4 shadow-sm text-sm text-gray-600 leading-relaxed italic" style="border-left-color: ${item.color}">
                             "${item.narrative}"
                         </div>
                     </div>
 
-                    <div class="p-8 space-y-6 overflow-y-auto custom-scroll flex-1">
-                        <!-- Frentes de Atuação -->
-                        <div>
-                            <h3 class="flex items-center gap-2 text-xs font-bold text-[#003399] uppercase tracking-wider mb-4 border-b border-gray-100 pb-2">
-                                <i data-lucide="layers" width="16" height="16"></i>
-                                Frentes de Atuação
-                            </h3>
-                            <div class="flex flex-wrap gap-2">
-                                ${item.frentes.map(frente => `
-                                    <span class="px-3 py-1.5 bg-gray-50 text-gray-700 rounded-lg text-xs font-bold border border-gray-200 shadow-sm">
-                                        ${frente}
-                                    </span>
-                                `).join('')}
-                            </div>
-                        </div>
-
-                        <!-- Métodos e Ações -->
-                        <div class="pb-6">
-                            <h3 class="flex items-center gap-2 text-xs font-bold text-[#003399] uppercase tracking-wider mb-4 border-b border-gray-100 pb-2">
-                                <i data-lucide="target" width="16" height="16"></i>
-                                Principais Projetos e Ações
-                            </h3>
-                            <ul class="space-y-3">
-                                ${item.methods.map(method => `
-                                    <li class="flex items-start gap-3 text-sm text-gray-700 bg-white p-3 rounded-xl border border-gray-100 shadow-sm">
-                                        <div class="mt-0.5" style="color: ${item.color}">
-                                            <i data-lucide="check-circle-2" width="18" height="18"></i>
-                                        </div>
-                                        <span class="font-medium">${method}</span>
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        </div>
+                    <div class="p-8 overflow-y-auto custom-scroll flex-1 bg-slate-50/50">
+                        ${detailsHTML}
                     </div>
                 </div>
             `;
