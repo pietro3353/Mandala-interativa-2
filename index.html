@@ -3,151 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mandala de Cultura Ypê</title>
+    <title>Mandala Ypê Circular 7 Dimensões</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     
     <style>
         /* Fundo definido para a cor do slide (#141950) */
-        body { font-family: 'Inter', sans-serif; background-color: #141950; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #141950; 
+            overflow: hidden; 
+        }
         
-        .slice-group { transition: transform 0.3s ease, opacity 0.3s ease; cursor: pointer; }
-        .slice-group:hover { opacity: 0.9; }
+        .slice-group { transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease; cursor: pointer; }
+        .slice-group:hover { opacity: 0.9; filter: brightness(1.1); }
         .slice-path { transition: fill 0.3s ease; }
-        .fade-in { animation: fadeIn 0.3s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Scrollbar customizada para o painel */
+        .fade-in { animation: fadeIn 0.4s ease-in-out forwards; }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(15px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
         .custom-scroll::-webkit-scrollbar { width: 6px; }
         .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #3A9480; border-radius: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #1B4D3E; }
     </style>
 </head>
-<body class="bg-[#141950] min-h-screen flex items-center justify-center p-4">
+<body class="min-h-screen flex items-center justify-center p-4 relative">
 
-    <div class="flex flex-col lg:flex-row items-start justify-center gap-8 w-full max-w-7xl">
+    <div class="flex flex-col lg:flex-row items-center justify-center gap-12 w-full max-w-[1400px] z-10">
         
-        <!-- Área da Mandala (SVG) -->
-        <div class="relative w-[600px] h-[600px] flex-shrink-0 drop-shadow-xl select-none mx-auto lg:mx-0">
-            <svg id="mandala-svg" width="600" height="600" viewBox="0 0 600 600">
+        <!-- Área da Mandala Circular (SVG) -->
+        <div class="relative w-[650px] h-[650px] flex-shrink-0 drop-shadow-2xl select-none mx-auto lg:mx-0">
+            <svg id="mandala-svg" width="650" height="650" viewBox="0 0 650 650">
                 <defs>
                     <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
                         <feGaussianBlur stdDeviation="3" result="blur" />
                         <feComposite in="SourceGraphic" in2="blur" operator="over" />
                     </filter>
                 </defs>
+                
                 <!-- Slices serão gerados via JS aqui -->
+                <g id="slices-layer"></g>
                 
-                <!-- Centro Estático (Fundo Branco com Borda Azul) -->
-                <circle cx="300" cy="300" r="85" fill="#FFFFFF" stroke="#002855" stroke-width="2" class="shadow-inner" />
-                
-                <!-- Texto Superior: O JEITO -->
-                <text x="300" y="270" text-anchor="middle" fill="#002855" font-size="14" font-weight="900" style="letter-spacing: 1px; text-transform: uppercase;">O JEITO</text>
-                
-                <!-- Logo Central: Ypê (Cor Azul Original) -->
-                <text x="300" y="315" text-anchor="middle" fill="#003399" font-weight="bold" font-size="42" style="font-style: italic; letter-spacing: -3px; font-family: 'Inter', sans-serif;">Ypê</text>
-                
-                <!-- Texto Inferior: DE... -->
-                <text x="300" y="350" text-anchor="middle" fill="#002855" font-size="14" font-weight="900" style="letter-spacing: 1px; text-transform: uppercase;">DE...</text>
+                <!-- Centro Estático Circular -->
+                <g id="center-group">
+                    <circle cx="325" cy="325" r="95" fill="#FFFFFF" stroke="#FFD700" stroke-width="3" class="shadow-inner" />
+                    
+                    <text x="325" y="295" text-anchor="middle" fill="#003399" font-size="14" font-weight="900" style="letter-spacing: 2px; text-transform: uppercase; font-family: 'Inter', sans-serif;">O JEITO</text>
+                    
+                    <text x="325" y="340" text-anchor="middle" fill="#003399" font-weight="bold" font-size="52" style="font-style: italic; letter-spacing: -3px; font-family: 'Inter', sans-serif; filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.1));">Ypê</text>
+                    
+                    <text x="325" y="375" text-anchor="middle" fill="#003399" font-size="14" font-weight="900" style="letter-spacing: 2px; text-transform: uppercase;">DE...</text>
+                </g>
             </svg>
 
             <!-- Tooltip Instrução -->
-            <div id="instruction-tooltip" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-32 bg-white/90 px-4 py-2 rounded-full text-xs text-gray-500 shadow-md pointer-events-none transition-opacity duration-300 border border-gray-200">
-                Passe o mouse nas fatias
+            <div id="instruction-tooltip" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-48 bg-white/95 px-6 py-2.5 rounded-full text-sm font-bold text-[#10403B] shadow-2xl pointer-events-none transition-opacity duration-300 border-2 border-[#FFD700] uppercase tracking-widest flex items-center gap-2">
+                <i data-lucide="mouse-pointer-click" width="16" height="16"></i>
+                Clique nas dimensões
             </div>
         </div>
 
-        <!-- Painel de Detalhes -->
-        <div id="detail-panel" class="flex-1 w-full max-w-md bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden min-h-[500px] flex flex-col transition-all duration-300">
-            <!-- Conteúdo será injetado via JS -->
+        <!-- Painel de Detalhes com as Novas Informações do Miro -->
+        <div id="detail-panel" class="flex-1 w-full max-w-lg bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl border-t-8 border-[#3A9480] overflow-hidden min-h-[600px] flex flex-col transition-all duration-300 relative">
             <div class="h-full flex flex-col items-center justify-center p-10 text-center text-gray-400">
-                <i data-lucide="lightbulb" class="w-12 h-12 mb-4 text-green-600 opacity-50"></i>
-                <h3 class="text-lg font-bold text-gray-600 mb-2">Explore a Cultura Ypê</h3>
-                <p class="text-sm">Selecione uma dimensão na mandala para visualizar os valores, métodos e indicadores de sucesso.</p>
+                <div class="bg-blue-50 p-6 rounded-full mb-6 shadow-inner">
+                    <i data-lucide="layout-dashboard" class="w-16 h-16 text-[#3A9480]"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-[#003399] mb-3">O Ecossistema Ypê</h3>
+                <p class="text-sm text-gray-500 max-w-xs leading-relaxed">Clique em uma das dimensões da mandala para explorar a narrativa estratégica, frentes de atuação e projetos.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // --- DADOS COM A NOVA PALETA DE CORES (GRADIENTE VERDE) ---
-        // As cores foram extraídas visualmente da imagem de referência (ciclo do Verde Escuro ao Verde Claro/Menta)
+        // --- DADOS REESTRUTURADOS COM BASE NO MIRO (7 DIMENSÕES) ---
+        // Paleta verde mantida conforme solicitação
         const data = [
-            {
-                id: "manufaturar",
-                label: "Manufaturar",
-                color: "#1B4D3E", // Verde Escuro Profundo (Topo)
-                textColor: "#FFFFFF", // Texto Branco para contraste
-                iconName: "factory",
-                values: ["Qualidade de Ponta a Ponta", "Trabalho com Disciplina", "Honestidade"],
-                methods: ["SEY (Sistema de Qualidade)", "Logística 4.0 (CD Automatizado/AGVs)", "S&OP Integrado", "Homologação Técnica"],
-                kpis: ["Zero Recall / Bloqueios", "OEE (Eficiência Global)", "OTIF (On Time In Full)", "Saving em Compras"]
+            { 
+                id: "inovar", 
+                label: "Inovar", 
+                color: "#18544B", 
+                textColor: "#FFFFFF", 
+                iconName: "lightbulb", 
+                narrative: "Inovação incremental com foco em gerar valor para a Ypê. Utiliza a inovação para sustentar seu crescimento, eficiência e relevância na prateleira. Nem sempre é inovação disruptiva. É estimular pessoas para trazer ideias e não só experimentar.",
+                frentes: ["Oficinas de Produto", "Novos Modelos", "Novos Mercados", "Negócio"], 
+                methods: ["Comitê de IA e Yara", "Oficinas de Tecnologia", "Novos Canais (Food Service, Digitais)", "Parcerias (ex. Loccitane)"] 
             },
-            {
-                id: "cuidar",
-                label: "Cuidar",
-                color: "#2E6B56", // Verde Floresta (Topo Direita)
-                textColor: "#FFFFFF",
-                iconName: "heart",
-                values: ["Cuidado", "Humildade", "Senso de Dono"],
-                methods: ["Ciclo de Gente & PDI", "SAC Humanizado", "Projeto Florestas Ypê", "Gestão de Recursos Hídricos"],
-                kpis: ["eNPS (Engajamento)", "Brand Health", "Créditos de Carbono", "Fidelidade / Recompra"]
+            { 
+                id: "liderar", 
+                label: "Liderar", 
+                color: "#22695C", 
+                textColor: "#FFFFFF", 
+                iconName: "flag", 
+                narrative: "Um sistema onde o líder define o caminho (Estratégia), prepara as Pessoas, garante os Processos, estabelece as regras (Governança) e protege a Reputação da marca. Uma liderança consistente que gera decisões eficazes.",
+                frentes: ["Estratégia e Mercado", "Pessoas e Engajamento", "Governança e Processos", "Reputação e Crise"], 
+                methods: ["Direcionamento 70 em 7 e PPR", "Ciclo de Gente (Calibração e Feedback)", "Ritos Trimestrais e Fóruns", "SEY, The Voice Ypê e Embaixadores"] 
             },
-            {
-                id: "projetizar",
-                label: "Projetizar",
-                color: "#418F71", // Verde Petróleo/Teal (Baixo Direita)
-                textColor: "#FFFFFF",
-                iconName: "zap",
-                values: ["Trabalho com Disciplina", "Simplicidade", "Senso de Dono"],
-                methods: ["Segurança da Informação", "Metodologia Lean / Kaizen", "Stage-Gate (Inovação)", "Automação de Fluxos"],
-                kpis: ["Zero Vazamento de Dados", "Redução de Desperdícios", "% Receita Novos Produtos", "Projetos Implementados"]
+            { 
+                id: "gerar-resultados", 
+                label: "Gerar Resultados", 
+                color: "#2D7E6E", 
+                textColor: "#FFFFFF", 
+                iconName: "trending-up", 
+                narrative: "Foco na entrega de valor real ao negócio, assegurando que os resultados financeiros não sejam obtidos a qualquer custo, mas sim através de processos eficientes, éticos e com alta qualidade.",
+                frentes: ["Eficiência e Performance", "Ética e Integridade", "Projetos Estruturados", "Disciplina Financeira"], 
+                methods: ["GPD (Modelo Falconi)", "Selo Pró-Ética e Canal de Conduta", "Governança VMO e IBP", "Gestão de Indicadores"] 
             },
-            {
-                id: "crescer",
-                label: "Crescer",
-                color: "#5EC2A0", // Verde Água Médio (Baixo)
-                textColor: "#002855", // Texto Azul Marinho para contraste no fundo claro
-                iconName: "trending-up",
-                values: ["Senso de Dono", "Qualidade de Ponta a Ponta", "Trabalho com Disciplina"],
-                methods: ["Expansão Fabril (Nordeste)", "Gestão de Categoria e Mix", "Relançamento de Marcas", "Gestão Orçamentária (OBZ)"],
-                kpis: ["Crescimento Receita Líquida", "Market Share", "EBITDA", "Capacidade Instalada"]
+            { 
+                id: "executar", 
+                label: "Executar", 
+                color: "#3A9480", 
+                textColor: "#FFFFFF", 
+                iconName: "check-square", 
+                narrative: "Foca em transformar o que foi planejado em realidade com excelência, disciplina e autorresponsabilização. Cumprir, realizar e colocar em prática as tarefas e rotinas do dia a dia com rigor técnico.",
+                frentes: ["Qualidade e Rotinas", "Sincronismo da Cadeia", "Eficiência Comercial", "Cliente e Logística"], 
+                methods: ["Diagnóstico de Qualidade (Nexus/Ekantika)", "S&OP e Gestão de Fornecimento", "JBP, CRM e Regionalização", "Acompanhamento de Ruptura e Prazos"] 
             },
-            {
-                id: "liderar",
-                label: "Liderar",
-                color: "#87DFC1", // Verde Menta (Baixo Esquerda)
-                textColor: "#002855",
-                iconName: "users",
-                values: ["Humildade", "Senso de Dono", "Honestidade"],
-                methods: ["Academia de Liderança Ypê", "Inteligência de Mercado", "Liderança pelo Exemplo", "Programa de Embaixadores"],
-                kpis: ["Índice de Prontidão (Pipeline)", "Top of Mind", "Reputação ESG", "Aderência aos Valores"]
+            { 
+                id: "servir", 
+                label: "Servir", 
+                color: "#49AA93", 
+                textColor: "#FFFFFF", 
+                iconName: "users", 
+                narrative: "Olhar aprofundado para os clusters de relacionamento para sustentar o fator fundamental do negócio. Uma proposta de valor clara focada na democratização do acesso e na experiência ponta a ponta.",
+                frentes: ["Portfólio de Produtos", "Consumidor", "Experiência Omnicanal", "Democratização de Acesso"], 
+                methods: ["Projeto IA SAC", "Pesquisas de Experiência do Consumidor", "Marketing (Campanhas, Redes, Mídia)", "Ominicanalidade da Jornada"] 
             },
-            {
-                id: "servir",
-                label: "Servir",
-                color: "#B5F5D9", // Verde Pálido/Gelo (Topo Esquerda)
-                textColor: "#002855",
-                iconName: "hand-heart",
-                values: ["Simplicidade", "Cuidado", "Honestidade"],
-                methods: ["JBP com Varejo", "Portal B2B Digital", "Voluntariado Corporativo", "Canal de Compliance"],
-                kpis: ["Crescimento Sell-out", "Facilidade de Compra", "Horas de Voluntariado", "Transparência"]
+            { 
+                id: "aprender", 
+                label: "Aprender", 
+                color: "#5BC1A6", 
+                textColor: "#002855", 
+                iconName: "book-open", 
+                narrative: "Deixar de ser vista como catálogo de cursos. O novo foco é transformar o aprendizado em cultura viva e diária, gerada na prática, compartilhada e institucionalizada para garantir a perenidade do negócio.",
+                frentes: ["Função Atual (Básico)", "Proficiência e Novas Habilidades", "Gestão do Conhecimento", "Comunidade"], 
+                methods: ["UnYpê e Plataforma Único Skill", "Academias (Sopro, Vendas, Manutenção)", "LUP, IOPs e Matrizes de Habilidade", "Ypê Talks e Multiplicadores"] 
+            },
+            { 
+                id: "cuidar", 
+                label: "Cuidar", 
+                color: "#70D7BA", 
+                textColor: "#002855", 
+                iconName: "heart", 
+                narrative: "Zelo pelo ecossistema do negócio, abrangendo desde o impacto social até a preservação dos ativos físicos. Uma atuação pautada por simplicidade e zelo prático, onde o cuidado não é via de mão única.",
+                frentes: ["Comunidade e Meio Ambiente", "Colaboradores e D&I", "Saúde e Segurança", "Patrimônio e Ativos"], 
+                methods: ["Programa Cuidar e Saúde Integral", "Sustentabilidade (Plano Diretor, GHG)", "Responsabilidade Social (Educa 2030, Voluntariado)", "Conservação Autônoma (TPM) e SSMA"] 
             }
         ];
 
-        // --- VARIÁVEIS DE ESTADO ---
-        let activeSliceIndex = null;
-        
-        // --- FUNÇÕES AUXILIARES DE GEOMETRIA ---
+        const center = { x: 325, y: 325 };
         const totalSlices = data.length;
-        const radius = 180;
-        const innerRadius = 90; // Aumentado ligeiramente para acomodar melhor o centro branco
-        const center = { x: 300, y: 300 };
+        const radius = 240; 
+        const innerRadius = 110;
 
+        // --- FUNÇÕES DE GEOMETRIA PARA ARCOS CIRCULARES (DONUT) ---
         function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
             const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
             return {
@@ -172,90 +189,98 @@
             ].join(" ");
         }
 
-        // --- RENDERIZAÇÃO DA MANDALA ---
+        // --- RENDERIZAÇÃO DOS SLICES ---
         function renderMandala() {
-            const svg = document.getElementById('mandala-svg');
-            const tooltip = document.getElementById('instruction-tooltip');
+            const slicesLayer = document.getElementById('slices-layer');
+            const anglePerSlice = 360 / totalSlices;
 
             data.forEach((item, index) => {
-                const anglePerSlice = 360 / totalSlices;
                 const startAngle = index * anglePerSlice;
                 const endAngle = startAngle + anglePerSlice;
 
-                // Grupo da fatia
                 const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
                 group.setAttribute("class", "slice-group");
                 group.setAttribute("data-index", index);
+                group.style.transformOrigin = `${center.x}px ${center.y}px`;
                 
-                // Path (desenho da fatia)
+                // O Arco (Fatia)
                 const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
                 path.setAttribute("d", describeDonutSlice(center.x, center.y, radius, innerRadius, startAngle, endAngle));
                 path.setAttribute("fill", item.color);
-                path.setAttribute("stroke", "white");
-                path.setAttribute("stroke-width", "3"); // Borda branca mais grossa para separar as fatias
+                path.setAttribute("stroke", "#141950"); // Borda da cor do fundo do slide para separar perfeitamente
+                path.setAttribute("stroke-width", "4"); 
                 path.setAttribute("class", "slice-path");
 
-                // Texto e Ícone
+                // Posição centralizada para ícone e texto
                 const textRadius = innerRadius + (radius - innerRadius) / 2;
-                const textPos = polarToCartesian(center.x, center.y, textRadius, startAngle + anglePerSlice / 2);
+                const midAngle = startAngle + (anglePerSlice / 2);
+                const textPos = polarToCartesian(center.x, center.y, textRadius, midAngle);
 
                 const foreignObject = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-                foreignObject.setAttribute("x", textPos.x - 40);
-                foreignObject.setAttribute("y", textPos.y - 30);
-                foreignObject.setAttribute("width", "80");
+                foreignObject.setAttribute("x", textPos.x - 50); 
+                foreignObject.setAttribute("y", textPos.y - 30); 
+                foreignObject.setAttribute("width", "100");
                 foreignObject.setAttribute("height", "60");
                 foreignObject.setAttribute("style", "pointer-events: none;"); 
 
                 const div = document.createElement("div");
                 div.className = "flex flex-col items-center justify-center h-full text-center";
                 div.innerHTML = `
-                    <div style="color: ${item.textColor};" class="mb-1 transform scale-75 lg:scale-100">
-                        <i data-lucide="${item.iconName}" width="24" height="24"></i>
+                    <div style="color: ${item.textColor};" class="mb-1 filter drop-shadow-md">
+                        <i data-lucide="${item.iconName}" width="22" height="22"></i>
                     </div>
-                    <span class="font-bold text-[10px] uppercase tracking-wider" style="color: ${item.textColor}; text-shadow: 0px 0px 2px rgba(0,0,0,0.1);">
+                    <span class="font-bold text-[10px] uppercase tracking-wider leading-tight" style="color: ${item.textColor}; text-shadow: 0px 1px 2px rgba(0,0,0,0.5);">
                         ${item.label}
                     </span>
                 `;
+                
                 foreignObject.appendChild(div);
-
                 group.appendChild(path);
                 group.appendChild(foreignObject);
 
-                // Eventos
-                group.addEventListener('mouseenter', () => {
-                    setActiveSlice(index);
-                });
-                group.addEventListener('click', () => {
-                    setActiveSlice(index);
-                });
+                group.addEventListener('click', () => setActiveSlice(index));
 
-                svg.insertBefore(group, svg.lastElementChild.previousElementSibling); // Insere antes do centro
+                slicesLayer.appendChild(group);
             });
-
+            
             lucide.createIcons(); 
         }
 
-        // --- ATUALIZAÇÃO DO PAINEL ---
+        // --- LÓGICA DE INTERAÇÃO (CLIQUE) ---
+        let activeSliceIndex = null;
+
         function setActiveSlice(index) {
             if (activeSliceIndex === index) return;
             activeSliceIndex = index;
 
-            // Escala visual na mandala
-            const slices = document.querySelectorAll('.slice-group');
-            slices.forEach((slice, idx) => {
-                if (idx === index) {
-                    slice.setAttribute("transform", "scale(1.05)");
-                    slice.style.transformOrigin = "center";
-                    slice.style.filter = "drop-shadow(0px 4px 6px rgba(0,0,0,0.2))";
+            const groups = document.querySelectorAll('.slice-group');
+            
+            groups.forEach((group) => {
+                const originalIndex = parseInt(group.getAttribute('data-index'));
+                const path = group.querySelector('.slice-path');
+
+                if (originalIndex === index) {
+                    // Fatia Ativa: Traz para frente, aumenta levemente
+                    group.parentNode.appendChild(group); 
+                    group.style.transform = `scale(1.05)`;
+                    
+                    // Adiciona borda dourada
+                    path.setAttribute("stroke", "#FFD700");
+                    path.setAttribute("stroke-width", "4");
+                    path.style.filter = "drop-shadow(0px 10px 15px rgba(0,0,0,0.4))";
                 } else {
-                    slice.setAttribute("transform", "scale(1)");
-                    slice.style.filter = "none";
+                    // Fatias Inativas: Voltam ao lugar original
+                    group.style.transform = `scale(1)`;
+                    path.setAttribute("stroke", "#141950");
+                    path.setAttribute("stroke-width", "4");
+                    path.style.filter = "none";
                 }
             });
 
-            // Esconder tooltip
-            document.getElementById('instruction-tooltip').style.opacity = '0';
-
+            // Esconde tooltip
+            const tooltip = document.getElementById('instruction-tooltip');
+            if(tooltip) tooltip.style.opacity = '0';
+            
             updatePanelContent(index);
         }
 
@@ -263,79 +288,72 @@
             const item = data[index];
             const panel = document.getElementById('detail-panel');
             
-            // HTML do Conteúdo
             const content = `
-                <div class="h-full flex flex-col fade-in">
-                    <div class="p-6 border-b" style="background-color: ${item.color};">
-                        <div class="flex items-center gap-3 mb-2">
-                            <div class="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
-                                <i data-lucide="${item.iconName}" width="28" height="28" style="color: ${item.textColor}"></i>
+                <div class="h-full flex flex-col fade-in relative">
+                    <div class="absolute top-0 left-0 w-full h-2" style="background-color: ${item.color}"></div>
+
+                    <div class="p-8 border-b border-gray-100 bg-gradient-to-b from-white to-gray-50">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-4 rounded-2xl shadow-lg transform -rotate-3" style="background-color: ${item.color}">
+                                <i data-lucide="${item.iconName}" width="32" height="32" class="text-white"></i>
                             </div>
-                            <h2 class="text-2xl font-bold" style="color: ${item.textColor}">
-                                ${item.label}
-                            </h2>
+                            <div>
+                                <h2 class="text-3xl font-black text-[#003399]">
+                                    ${item.label}
+                                </h2>
+                                <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">
+                                    Dimensão Estratégica
+                                </p>
+                            </div>
                         </div>
-                        <p class="text-sm font-medium opacity-90" style="color: ${item.textColor}">
-                            Dimensão Estratégica
-                        </p>
+                        
+                        <!-- Nova Seção de Narrativa -->
+                        <div class="bg-white p-4 rounded-xl border-l-4 shadow-sm text-sm text-gray-600 leading-relaxed italic" style="border-left-color: ${item.color}">
+                            "${item.narrative}"
+                        </div>
                     </div>
 
-                    <div class="p-6 space-y-6 overflow-y-auto custom-scroll flex-1">
-                        <!-- Valores -->
+                    <div class="p-8 space-y-6 overflow-y-auto custom-scroll flex-1">
+                        <!-- Frentes de Atuação -->
                         <div>
-                            <h3 class="flex items-center gap-2 text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">
-                                <i data-lucide="shield-check" width="16" height="16"></i>
-                                Valores Essenciais
+                            <h3 class="flex items-center gap-2 text-xs font-bold text-[#003399] uppercase tracking-wider mb-4 border-b border-gray-100 pb-2">
+                                <i data-lucide="layers" width="16" height="16"></i>
+                                Frentes de Atuação
                             </h3>
                             <div class="flex flex-wrap gap-2">
-                                ${item.values.map(val => `
-                                    <span class="px-3 py-1 bg-slate-50 text-slate-700 rounded-full text-xs font-semibold border border-slate-200">
-                                        ${val}
+                                ${item.frentes.map(frente => `
+                                    <span class="px-3 py-1.5 bg-gray-50 text-gray-700 rounded-lg text-xs font-bold border border-gray-200 shadow-sm">
+                                        ${frente}
                                     </span>
                                 `).join('')}
                             </div>
                         </div>
 
-                        <!-- Métodos -->
-                        <div>
-                            <h3 class="flex items-center gap-2 text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">
+                        <!-- Métodos e Ações -->
+                        <div class="pb-6">
+                            <h3 class="flex items-center gap-2 text-xs font-bold text-[#003399] uppercase tracking-wider mb-4 border-b border-gray-100 pb-2">
                                 <i data-lucide="target" width="16" height="16"></i>
-                                Principais Ações (Métodos)
+                                Principais Projetos e Ações
                             </h3>
-                            <ul class="space-y-2">
+                            <ul class="space-y-3">
                                 ${item.methods.map(method => `
-                                    <li class="flex items-start gap-2 text-sm text-gray-600">
-                                        <div class="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style="background-color: ${item.color}"></div>
-                                        ${method}
+                                    <li class="flex items-start gap-3 text-sm text-gray-700 bg-white p-3 rounded-xl border border-gray-100 shadow-sm">
+                                        <div class="mt-0.5" style="color: ${item.color}">
+                                            <i data-lucide="check-circle-2" width="18" height="18"></i>
+                                        </div>
+                                        <span class="font-medium">${method}</span>
                                     </li>
                                 `).join('')}
                             </ul>
                         </div>
-
-                        <!-- KPIs -->
-                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                            <h3 class="flex items-center gap-2 text-sm font-bold uppercase tracking-wider mb-3" style="color: ${item.color}">
-                                <i data-lucide="bar-chart-2" width="16" height="16"></i>
-                                Indicadores de Sucesso (KPIs)
-                            </h3>
-                            <div class="grid grid-cols-1 gap-2">
-                                ${item.kpis.map(kpi => `
-                                    <div class="flex justify-between items-center text-sm">
-                                        <span class="text-slate-700 font-medium">${kpi}</span>
-                                        <span class="text-[10px] bg-white px-2 py-0.5 rounded border border-slate-200 text-gray-400">Alvo</span>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
                     </div>
                 </div>
             `;
-
             panel.innerHTML = content;
             lucide.createIcons(); 
         }
 
-        // Inicialização
+        // --- INICIALIZAÇÃO ---
         document.addEventListener('DOMContentLoaded', () => {
             renderMandala();
             lucide.createIcons();
